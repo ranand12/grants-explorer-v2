@@ -1,0 +1,234 @@
+@import "tailwindcss";
+
+:root {
+  --slate-950: #0c1220;
+  --slate-900: #111827;
+  --slate-800: #1e293b;
+  --slate-700: #334155;
+  --slate-600: #475569;
+  --slate-500: #64748b;
+  --slate-400: #94a3b8;
+  --slate-300: #cbd5e1;
+  --slate-200: #e2e8f0;
+  --slate-100: #f1f5f9;
+  --slate-50: #f8fafc;
+
+  --amber-500: #f59e0b;
+  --amber-400: #fbbf24;
+  --amber-100: #fef3c7;
+
+  --ub-blue: #005bbb;
+  --ub-blue-light: #e8f0fe;
+  --albany-gold: #46166b;
+  --albany-gold-light: #f3e8ff;
+
+  --background: #faf9f7;
+  --foreground: var(--slate-900);
+
+  --font-body: var(--font-montserrat);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-montserrat);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+/* ── Animations ── */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 600px;
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out both;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.35s ease-out both;
+  overflow: hidden;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Stagger children */
+.stagger-children > * {
+  animation: fadeInUp 0.45s ease-out both;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.12s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.19s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.26s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.33s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.40s; }
+
+/* ── Card effects ── */
+
+.card-hover {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 12px 28px -8px rgba(0, 0, 0, 0.08),
+    0 4px 12px -4px rgba(0, 0, 0, 0.04);
+}
+
+/* Noise texture overlay */
+.noise-bg::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  background: repeating-conic-gradient(#0001 0% 25%, transparent 0% 50%) 0 0 / 4px 4px;
+  z-index: 9999;
+}
+
+/* ── Form inputs ── */
+
+.form-input {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  border: 1.5px solid var(--slate-200);
+  border-radius: 0.625rem;
+  background: white;
+  font-size: 0.875rem;
+  color: var(--slate-900);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+.form-input:focus {
+  outline: none;
+  border-color: var(--albany-gold);
+  box-shadow: 0 0 0 3px rgba(70, 22, 107, 0.1);
+}
+.form-input::placeholder {
+  color: var(--slate-400);
+}
+
+/* ── Subtle grain on cards ── */
+.grain-surface {
+  position: relative;
+}
+.grain-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.03;
+  background: repeating-conic-gradient(#0001 0% 25%, transparent 0% 50%) 0 0 / 3px 3px;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--slate-300);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--slate-400);
+}
+
+/* ── v2: streaming draft placeholders ── */
+.shimmer {
+  background: linear-gradient(90deg, var(--slate-100, #f1f5f9) 0%, #e2e8f0 40%, var(--slate-100, #f1f5f9) 80%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+  border-radius: 6px;
+}
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+/* ── v2: markdown inside drafts and callouts ── */
+.prose-draft { color: #334155; line-height: 1.75; font-size: 0.95rem; }
+.prose-draft p { margin: 0 0 0.9em; }
+.prose-draft h1, .prose-draft h2, .prose-draft h3 { font-weight: 700; color: #0f172a; margin: 1.2em 0 0.5em; }
+.prose-draft h3 { font-size: 1rem; }
+.prose-draft ul, .prose-draft ol { margin: 0 0 0.9em 1.25em; }
+.prose-draft ul { list-style: disc; }
+.prose-draft ol { list-style: decimal; }
+.prose-draft li { margin: 0.25em 0; }
+.prose-draft strong { color: #0f172a; }
+.prose-draft table { border-collapse: collapse; margin: 0.8em 0; font-size: 0.85rem; width: 100%; }
+.prose-draft th, .prose-draft td { border: 1px solid #e2e8f0; padding: 0.4em 0.6em; text-align: left; }
+.prose-draft th { background: #f8fafc; }
+.prose-callout p { margin: 0 0 0.5em; }
+.prose-callout p:last-child { margin: 0; }
+.prose-callout ul { list-style: disc; margin-left: 1.1em; }
+
+/* ── v2: A2UI surfaces ── */
+.bar-grow { transform-origin: left; animation: bar-grow 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes bar-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.a2ui-host { display: flex; flex-direction: column; gap: 1rem; }
+.a2ui-host button { cursor: pointer; }
+.a2ui-host h1 { font-size: 2rem; font-weight: 800; color: #0f172a; line-height: 1.15; }
+.a2ui-host h2 { font-size: 1.75rem; font-weight: 700; color: #0f172a; line-height: 1.2; }
+.a2ui-host h3 { font-size: 1.25rem; font-weight: 700; color: #0f172a; }
+.a2ui-host h4 { font-size: 1rem; font-weight: 700; color: #1e293b; }
+.a2ui-host h5 { font-size: 0.7rem; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.2em; }
+.a2ui-host em { color: #64748b; font-style: normal; font-size: 0.875rem; }

@@ -1,0 +1,17 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '--build-arg'
+      - 'AGENT_URL=${_AGENT_URL}'
+      - '--build-arg'
+      - 'NEXT_PUBLIC_LIVE_WS_URL=${_LIVE_WS_URL}'
+      - '-t'
+      - '${_IMAGE}'
+      - '.'
+images:
+  - '${_IMAGE}'
+substitutions:
+  _IMAGE: 'us-central1-docker.pkg.dev/YOUR_PROJECT_ID/YOUR_REPO/grants-frontend:latest'
+  _AGENT_URL: 'https://YOUR-AGENT-SERVICE.run.app/'
+  _LIVE_WS_URL: 'wss://YOUR-AGENT-SERVICE.run.app/live'
