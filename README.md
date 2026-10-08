@@ -28,3 +28,7 @@ AGENT_URL=http://localhost:8001/ npm run dev   # http://localhost:3000
 ## Deploy
 
 Both folders have a `Dockerfile` and `cloudbuild.yaml` for Cloud Run. Replace the `YOUR_PROJECT_ID` / `YOUR_REPO` / `YOUR-AGENT-SERVICE` placeholders, and keep API keys in Secret Manager.
+
+## Disclaimer
+
+This repository and its contents are provided for illustration and educational purposes only as example code. This is not an official Google product or officially supported Google Cloud project. This code is provided as-is for demonstration purposes and is NOT intended or supported for production workloads. The views, code, and opinions expressed in this repository are those of the author(s) and do not necessarily reflect the position, opinions, or official policy of Google LLC or Google Cloud Platform.
